@@ -17,12 +17,13 @@ spec:
       labels:
         k8s-app: metricbeat
     spec:
-      securityContext:
-        seLinuxOptions:
-          user: system_u
-          role: system_r
-          type: spc_t
-          level: s0
+      # Uncomment this if you have SELinux enforcing on the Kubernetes Nodes.
+#      securityContext:
+#        seLinuxOptions:
+#          user: system_u
+#          role: system_r
+#          type: spc_t
+#          level: s0
       serviceAccountName: metricbeat
       terminationGracePeriodSeconds: 30
       hostNetwork: true
