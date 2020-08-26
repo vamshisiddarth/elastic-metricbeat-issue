@@ -16,3 +16,5 @@ rules:
 ```
 
 We also need to have the kube-state-metrics up and running for the metricbeat to fetch all the metrics from the Kubernetes cluster.
+
+Updating the code for auto assign bot testing.
