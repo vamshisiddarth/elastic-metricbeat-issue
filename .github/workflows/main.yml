@@ -15,9 +15,6 @@ jobs:
 
     services:
       elasticsearch:
-        # image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
-        # image: blacktop/elasticsearch:7.8.0
-        # image: vamshisiddarth1/elasticsearch:7.9.2
         image: tradeling/base-docker-image-es:latest-develop
         credentials:
           username: vamshisiddarth1
@@ -25,3 +22,14 @@ jobs:
         ports:
           - 9200:9200
         options: -e="discovery.type=single-node"
+        
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 30
+          persist-credentials: false
+
+      - name: General
+        run: |
+          # comment
+          echo ${{ secrets.DOCKER_PAT }}
