@@ -1,10 +1,27 @@
 name: 'Auto Assign'
-on: pull_request
+#on: pull_request
+on:
+  push:
+    paths:
+      - '.github/**'
+
+env:
+  DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
 
 jobs:
-  add-reviews:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: kentaro-m/auto-assign-action@v1.1.1
-        with:
-          configuration-path: ".github/auto_assign.yml"
+  build:
+    runs-on: ubuntu-18.04
+    timeout-minutes: 20
+
+    services:
+      elasticsearch:
+        # image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
+        # image: blacktop/elasticsearch:7.8.0
+        # image: vamshisiddarth1/elasticsearch:7.9.2
+        image: tradeling/base-docker-image-es:latest-develop
+        credentials:
+          username: vamshisiddarth1
+          password: ${{ secrets.DOCKER_PAT }}
+        ports:
+          - 9200:9200
+        options: -e="discovery.type=single-node"
